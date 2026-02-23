@@ -35,6 +35,36 @@ async function main() {
         });
         console.log(`Created recipe: ${recipe.name} (ID: ${recipe.id})`);
     }
+    // --- Create Demo User ---
+    const demoUserId = 'demo-user-id';
+    const existingUser = await prisma.user.findUnique({ where: { id: demoUserId } });
+
+    if (!existingUser) {
+        console.log('Creating demo user...');
+        await prisma.user.create({
+            data: {
+                id: demoUserId,
+                email: 'demo@example.com',
+                password: 'hashed-password-here', // In produzione usare bcrypt
+                name: 'Mauro Demo',
+                birthDate: new Date('1990-01-01'),
+                gender: 'MALE',
+                height: 180,
+                baseWeight: 80,
+                spiceTolerance: 5,
+                healthProfile: {
+                    create: {
+                        currentBmr: 1800,
+                        currentTdee: 2500,
+                        adaptiveTdee: 2500,
+                    }
+                }
+            }
+        });
+        console.log('Demo user created.');
+    } else {
+        console.log('Demo user already exists.');
+    }
 
     console.log('Seeding finished.');
 }
