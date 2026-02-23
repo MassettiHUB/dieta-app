@@ -20,6 +20,12 @@ model User {
   spiceTolerance    Int
   medicalHistory    String?
   dietaryRestrictions String[]
+  
+  // New Training Fields
+  activityLevel     Float    @default(1.2)
+  fitnessGoal       String   @default("MAINTAIN") // LOSE, MAINTAIN, GAIN
+  trainingLevel     String   @default("BEGINNER") // BEGINNER, INTERMEDIATE, ADVANCED
+  availableEquipment String[] // e.g., ["BODYWEIGHT", "DUMBBELLS", "GYM"]
 
   healthProfile     HealthProfile?
   activityLogs      ActivityLog[]
@@ -40,6 +46,12 @@ model HealthProfile {
   currentTdee    Float
   adaptiveTdee   Float
   bodyFatPercentage Float?
+  
+  // New Measurements for BF% calculation
+  neckCircumference  Float?
+  waistCircumference Float?
+  hipCircumference   Float?
+  chestCircumference Float?
 }
 
 model ActivityLog {
