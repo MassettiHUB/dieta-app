@@ -31,8 +31,32 @@ export class UserService {
 
         const hashedPassword = await bcrypt.hash(data.password || 'DietaApp2026!', 10);
 
-        return this.prisma.user.create({
-            data: {
+        return this.prisma.user.upsert({
+            where: { email: data.email },
+            update: {
+                name: data.name,
+                birthDate: new Date(data.birthDate),
+                gender: data.gender,
+                height: data.height,
+                baseWeight: data.weight,
+                activityLevel: data.activityLevel,
+                fitnessGoal: data.fitnessGoal || 'MAINTAIN',
+                trainingLevel: data.trainingLevel || 'BEGINNER',
+                availableEquipment: data.availableEquipment || [],
+                healthProfile: {
+                    update: {
+                        currentBmr: bmr,
+                        currentTdee: tdee,
+                        adaptiveTdee: tdee,
+                        bodyFatPercentage: bodyFat,
+                        neckCircumference: data.neck,
+                        waistCircumference: data.waist,
+                        hipCircumference: data.hip,
+                        chestCircumference: data.chest,
+                    },
+                },
+            },
+            create: {
                 email: data.email,
                 password: hashedPassword,
                 name: data.name,
