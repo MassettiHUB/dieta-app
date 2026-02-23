@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  password          String   // Aggiunto per JWT Auth
+  name              String?
+  birthDate         DateTime
+  gender            String
+  height            Float
+  baseWeight        Float
+  cuisinePreference String[]
+  spiceTolerance    Int
+  medicalHistory    String?
+  dietaryRestrictions String[]
+
+  healthProfile     HealthProfile?
+  activityLogs      ActivityLog[]
+  nutritionLogs     NutritionLog[]
+  progressLogs      ProgressLog[]
+  goals             Goal[]
+  pantry            PantryItem[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model HealthProfile {
+  id             String @id @default(uuid())
+  userId         String @unique
+  user           User   @relation(fields: [userId], references: [id])
+  currentBmr     Float
+  currentTdee    Float
+  adaptiveTdee   Float
+  bodyFatPercentage Float?
+}
+
+model ActivityLog {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  type           String   // e.g., "Workout", "Walking"
+  durationMinutes Int
+  caloriesBurned Float
+  timestamp      DateTime @default(now())
+}
+
+model NutritionLog {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  calories       Float
+  protein        Float
+  carbs          Float
+  fats           Float
+  isRestaurant   Boolean  @default(false)
+  timestamp      DateTime @default(now())
+}
+
+model Goal {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  targetWeight   Float
+  targetDate     DateTime
+  isActive       Boolean  @default(true)
+}
+
+model ProgressLog {
+  id                String   @id @default(uuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  weight            Float
+  skinfoldChest     Float?
+  skinfoldMidaxillary Float?
+  skinfoldTriceps   Float?
+  skinfoldSubscapular Float?
+  skinfoldAbdominal Float?
+  skinfoldSuprailiac Float?
+  skinfoldThigh     Float?
+  calculatedBodyFat Float?
+  timestamp         DateTime @default(now())
+}
+
+model PantryItem {
+  id             String @id @default(uuid())
+  userId         String
+  user           User   @relation(fields: [userId], references: [id])
+  ingredientName String
+  quantity       Float
+  unit           String
+}
+
+model Recipe {
+  id          String   @id @default(uuid())
+  name        String
+  category    String   // e.g., "Lombard", "Italian", "International"
+  description String?
+  calories    Int
+  protein     Float
+  carbs       Float
+  fats        Float
+  cuisine     String
+  isSpice     Boolean  @default(false)
+  ingredients RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id        String @id @default(uuid())
+  recipeId  String
+  recipe    Recipe @relation(fields: [recipeId], references: [id])
+  name      String
+  quantity  Float
+  unit      String
+}

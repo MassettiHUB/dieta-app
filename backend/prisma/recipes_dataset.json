@@ -1,0 +1,231 @@
+[
+    {
+        "name": "Pizzoccheri della Valtellina",
+        "category": "Lombard",
+        "description": "Tagliatelle di grano saraceno con patate, verza e formaggio Valtellina Casera.",
+        "cuisine": "Italian",
+        "calories": 650,
+        "protein": 22,
+        "carbs": 75,
+        "fats": 32,
+        "ingredients": [
+            {
+                "name": "Pizzoccheri",
+                "quantity": 100,
+                "unit": "g"
+            },
+            {
+                "name": "Patate",
+                "quantity": 150,
+                "unit": "g"
+            },
+            {
+                "name": "Verza",
+                "quantity": 100,
+                "unit": "g"
+            },
+            {
+                "name": "Formaggio Casera",
+                "quantity": 80,
+                "unit": "g"
+            },
+            {
+                "name": "Burro",
+                "quantity": 20,
+                "unit": "g"
+            }
+        ]
+    },
+    {
+        "name": "Casoncelli alla Bergamasca",
+        "category": "Lombard",
+        "description": "Pasta ripiena tipica di Bergamo con burro versato, salvia e pancetta.",
+        "cuisine": "Italian",
+        "calories": 580,
+        "protein": 18,
+        "carbs": 60,
+        "fats": 30,
+        "ingredients": [
+            {
+                "name": "Casoncelli",
+                "quantity": 150,
+                "unit": "g"
+            },
+            {
+                "name": "Burro",
+                "quantity": 25,
+                "unit": "g"
+            },
+            {
+                "name": "Pancetta",
+                "quantity": 30,
+                "unit": "g"
+            },
+            {
+                "name": "Salvia",
+                "quantity": 5,
+                "unit": "leaves"
+            }
+        ]
+    },
+    {
+        "name": "Sushi Nigiri Selection",
+        "category": "International",
+        "description": "Selezione di nigiri con salmone, tonno e gamberi.",
+        "cuisine": "Japanese",
+        "calories": 350,
+        "protein": 25,
+        "carbs": 55,
+        "fats": 4,
+        "ingredients": [
+            {
+                "name": "Riso per sushi",
+                "quantity": 150,
+                "unit": "g"
+            },
+            {
+                "name": "Salmone fresco",
+                "quantity": 60,
+                "unit": "g"
+            },
+            {
+                "name": "Tonno fresco",
+                "quantity": 60,
+                "unit": "g"
+            },
+            {
+                "name": "Gamberi",
+                "quantity": 40,
+                "unit": "g"
+            }
+        ]
+    },
+    {
+        "name": "Tacos al Pastor",
+        "category": "International",
+        "description": "Tacos messicani con carne di maiale marinata, ananas e coriandolo.",
+        "cuisine": "Mexican",
+        "calories": 480,
+        "protein": 30,
+        "carbs": 40,
+        "fats": 22,
+        "ingredients": [
+            {
+                "name": "Tortillas di mais",
+                "quantity": 3,
+                "unit": "pcs"
+            },
+            {
+                "name": "Carne di maiale",
+                "quantity": 150,
+                "unit": "g"
+            },
+            {
+                "name": "Ananas",
+                "quantity": 50,
+                "unit": "g"
+            },
+            {
+                "name": "Cipolla",
+                "quantity": 20,
+                "unit": "g"
+            }
+        ]
+    },
+    {
+        "name": "Lasagna alla Bolognese",
+        "category": "Italian",
+        "description": "Pasta all'uovo stratificata con ragù alla bolognese, besciamella e parmigiano.",
+        "cuisine": "Italian",
+        "calories": 720,
+        "protein": 35,
+        "carbs": 50,
+        "fats": 42,
+        "ingredients": [
+            {
+                "name": "Fogli di lasagna",
+                "quantity": 100,
+                "unit": "g"
+            },
+            {
+                "name": "Ragù alla bolognese",
+                "quantity": 200,
+                "unit": "g"
+            },
+            {
+                "name": "Besciamella",
+                "quantity": 150,
+                "unit": "ml"
+            },
+            {
+                "name": "Parmigiano",
+                "quantity": 30,
+                "unit": "g"
+            }
+        ]
+    },
+    {
+        "name": "Miso Ramen",
+        "category": "International",
+        "description": "Zuppa di noodles giapponese con brodo di miso, uovo, maiale e alghe.",
+        "cuisine": "Japanese",
+        "calories": 600,
+        "protein": 28,
+        "carbs": 70,
+        "fats": 22,
+        "ingredients": [
+            {
+                "name": "Noodles ramen",
+                "quantity": 120,
+                "unit": "g"
+            },
+            {
+                "name": "Brodo di miso",
+                "quantity": 400,
+                "unit": "ml"
+            },
+            {
+                "name": "Maiale (Chashu)",
+                "quantity": 60,
+                "unit": "g"
+            },
+            {
+                "name": "Uovo marinato",
+                "quantity": 1,
+                "unit": "pcs"
+            }
+        ]
+    },
+    {
+        "name": "Hummus Classico con Pita",
+        "category": "International",
+        "description": "Crema di ceci e tahina servita con pane pita caldo.",
+        "cuisine": "Middle Eastern",
+        "calories": 400,
+        "protein": 12,
+        "carbs": 45,
+        "fats": 18,
+        "ingredients": [
+            {
+                "name": "Ceci cotti",
+                "quantity": 150,
+                "unit": "g"
+            },
+            {
+                "name": "Tahina",
+                "quantity": 30,
+                "unit": "g"
+            },
+            {
+                "name": "Pane Pita",
+                "quantity": 1,
+                "unit": "pcs"
+            },
+            {
+                "name": "Olio d'oliva",
+                "quantity": 10,
+                "unit": "ml"
+            }
+        ]
+    }
+]
