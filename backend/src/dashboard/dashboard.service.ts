@@ -11,13 +11,39 @@ export class DashboardService {
         const todayEnd = endOfDay(new Date());
 
         // 1. Get User Profile and Metabolic Data
-        const user = await this.prisma.user.findUnique({
+        let user = await this.prisma.user.findUnique({
             where: { id: userId },
             include: { healthProfile: true },
         });
 
+        // AUTO-CREATE DEMO USER IF MISSING (per scopi di demo/test)
+        if (!user && userId === 'demo-user-id') {
+            console.log('Auto-creating missing demo user...');
+            user = await this.prisma.user.create({
+                data: {
+                    id: userId,
+                    email: 'demo@example.com',
+                    password: 'demo-password',
+                    name: 'Mauro Demo',
+                    birthDate: new Date('1990-01-01'),
+                    gender: 'MALE',
+                    height: 180,
+                    baseWeight: 80,
+                    spiceTolerance: 5,
+                    healthProfile: {
+                        create: {
+                            currentBmr: 1800,
+                            currentTdee: 2500,
+                            adaptiveTdee: 2500,
+                        }
+                    }
+                },
+                include: { healthProfile: true },
+            });
+        }
+
         if (!user || !user.healthProfile) {
-            throw new Error('User or Health Profile not found');
+            throw new Error(`Utente ${userId} non trovato nel database.`);
         }
 
         // 2. Aggregate Today's Nutrition
