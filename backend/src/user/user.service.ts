@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { calculateBMR, calculateTDEE } from '../logic/metabolic';
 import * as bcrypt from 'bcrypt';
+import { calculateBMR, calculateTDEE, calculateBodyFat } from '../logic/metabolic';
 
 @Injectable()
 export class UserService {
@@ -16,10 +16,18 @@ export class UserService {
         activityLevel: number;
         email: string;
         password?: string;
+        fitnessGoal?: string;
+        trainingLevel?: string;
+        availableEquipment?: string[];
+        neck?: number;
+        waist?: number;
+        hip?: number;
+        chest?: number;
     }) {
         const age = this.calculateAge(new Date(data.birthDate));
         const bmr = calculateBMR(data.weight, data.height, age, data.gender);
         const tdee = calculateTDEE(bmr, data.activityLevel);
+        const bodyFat = calculateBodyFat(data.gender, data.height, data.neck || 0, data.waist || 0, data.hip);
 
         const hashedPassword = await bcrypt.hash(data.password || 'DietaApp2026!', 10);
 
@@ -32,12 +40,21 @@ export class UserService {
                 gender: data.gender,
                 height: data.height,
                 baseWeight: data.weight,
-                spiceTolerance: 0, // Default
+                activityLevel: data.activityLevel,
+                fitnessGoal: data.fitnessGoal || 'MAINTAIN',
+                trainingLevel: data.trainingLevel || 'BEGINNER',
+                availableEquipment: data.availableEquipment || [],
+                spiceTolerance: 0,
                 healthProfile: {
                     create: {
                         currentBmr: bmr,
                         currentTdee: tdee,
                         adaptiveTdee: tdee,
+                        bodyFatPercentage: bodyFat,
+                        neckCircumference: data.neck,
+                        waistCircumference: data.waist,
+                        hipCircumference: data.hip,
+                        chestCircumference: data.chest,
                     },
                 },
             },

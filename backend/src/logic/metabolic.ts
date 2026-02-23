@@ -48,3 +48,32 @@ export function calculateTargetCalories(tdee: number, targetDeficit: number = 50
   const minimumCalories = 1200;
   return Math.max(tdee - targetDeficit, minimumCalories);
 }
+/**
+ * Calcola la percentuale di massa grassa (Body Fat %) usando il metodo della Marina Militare Americana.
+ * 
+ * @param gender Genere ("male" o "female")
+ * @param height Altezza in cm
+ * @param neck Circonferenza collo in cm
+ * @param waist Circonferenza vita in cm
+ * @param hip Circonferenza fianchi in cm (solo per donne)
+ */
+export function calculateBodyFat(
+  gender: 'male' | 'female',
+  height: number,
+  neck: number,
+  waist: number,
+  hip?: number
+): number | null {
+  if (!height || !neck || !waist || (gender === 'female' && !hip)) return null;
+
+  let bodyFat = 0;
+  if (gender === 'male') {
+    // Uomini: 495 / ( 1.0324 - 0.19077 * log10( Addome - Collo ) + 0.15456 * log10( Altezza ) ) - 450
+    bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450;
+  } else {
+    // Donne: 495 / ( 1.29579 - 0.35004 * log10( Addome + Fianchi - Collo ) + 0.22100 * log10( Altezza ) ) - 450
+    bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(waist + (hip || 0) - neck) + 0.22100 * Math.log10(height)) - 450;
+  }
+
+  return Math.round(bodyFat * 10) / 10;
+}
